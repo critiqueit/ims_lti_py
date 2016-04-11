@@ -1,3 +1,6 @@
+from builtins import str
+from past.builtins import basestring
+from builtins import object
 from collections import defaultdict
 import sys
 
@@ -5,7 +8,7 @@ py   = sys.version_info
 if py <  (2, 6, 0): bytes=str
 
 def touni(s, enc='utf8', err='strict'):
-    return s.decode(enc, err) if isinstance(s, bytes) else unicode(s)
+    return s.decode(enc, err) if isinstance(s, bytes) else str(s)
 
 
 # List of the standard launch parameters for an LTI launch
@@ -102,7 +105,7 @@ class LaunchParamsMixin(object):
         the LAUNCH_DATA_PARAMETERS list, or that start with 'custom_' or
         'ext_'.
         '''
-        for key, val in params.items():
+        for key, val in list(params.items()):
             if key in LAUNCH_DATA_PARAMETERS and val != 'None':
                 if key == 'roles':
                     if isinstance(val, list):

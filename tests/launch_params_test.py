@@ -1,13 +1,14 @@
+from builtins import object
 from test_helper import create_test_tp, create_test_tc, create_params_tp
 
 import unittest
 
-class DontTestLaunchParams():
+class DontTestLaunchParams(object):
     def test_process_params(self):
         '''
         Should process parameters.
         '''
-        for (key, val) in self.params.iteritems():
+        for (key, val) in self.params.items():
             if not 'custom_' in key\
                     and not 'ext_' in key\
                     and not 'roles' in key:

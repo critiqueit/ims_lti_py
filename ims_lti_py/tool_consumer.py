@@ -1,5 +1,8 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from collections import defaultdict
-from urllib2 import urlparse, unquote
+from urllib.parse import unquote
 
 import oauth2
 import time

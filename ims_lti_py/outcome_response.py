@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 from lxml import etree, objectify
 
 CODE_MAJOR_CODES = [
@@ -27,7 +29,7 @@ accessors = [
 ]
 
 
-class OutcomeResponse():
+class OutcomeResponse(object):
     '''
     This class consumes & generates LTI Outcome Responses.
 
@@ -48,7 +50,7 @@ class OutcomeResponse():
             setattr(self, opt, None)
 
         # Store specified options in our options member
-        for (key, val) in kwargs.iteritems():
+        for (key, val) in kwargs.items():
             setattr(self, key, val)
 
     @staticmethod

@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 from collections import defaultdict
 from lxml import etree, objectify
 
@@ -24,7 +26,7 @@ accessors = [
 ]
 
 
-class OutcomeRequest():
+class OutcomeRequest(object):
     '''
     Class for consuming & generating LTI Outcome Requests.
 
@@ -41,7 +43,7 @@ class OutcomeRequest():
             setattr(self, accessor, None)
 
         # Store specified options in our accessors
-        for (key, val) in opts.iteritems():
+        for (key, val) in opts.items():
             setattr(self, key, val)
 
     @staticmethod
