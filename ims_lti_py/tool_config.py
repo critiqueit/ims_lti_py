@@ -2,7 +2,7 @@ from builtins import object
 from collections import defaultdict
 from lxml import etree, objectify
 
-from utils import InvalidLTIConfigError
+from .utils import InvalidLTIConfigError
 
 accessors = [
         'title',

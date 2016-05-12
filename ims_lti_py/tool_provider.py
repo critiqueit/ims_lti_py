@@ -1,13 +1,13 @@
 from future import standard_library
 standard_library.install_aliases()
-from launch_params import LaunchParamsMixin
-from request_validator import (
+from .launch_params import LaunchParamsMixin
+from .request_validator import (
     RequestValidatorMixin,
     FlaskRequestValidatorMixin,
     DjangoRequestValidatorMixin,
     WebObRequestValidatorMixin
 )
-from outcome_request import OutcomeRequest
+from .outcome_request import OutcomeRequest
 from collections import defaultdict
 import re
 from urllib.parse import urlencode

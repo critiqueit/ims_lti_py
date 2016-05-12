@@ -7,9 +7,9 @@ from urllib.parse import unquote
 import oauth2
 import time
 
-from launch_params import LaunchParamsMixin
-from request_validator import RequestValidatorMixin
-from utils import InvalidLTIConfigError, generate_identifier
+from .launch_params import LaunchParamsMixin
+from .request_validator import RequestValidatorMixin
+from .utils import InvalidLTIConfigError, generate_identifier
 
 accessors = [
     'consumer_key',
