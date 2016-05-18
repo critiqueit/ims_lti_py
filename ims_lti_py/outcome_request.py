@@ -174,7 +174,7 @@ class OutcomeRequest(object):
         '''
         Parse Outcome Request data from XML.
         '''
-        root = objectify.fromstring(xml)
+        root = objectify.fromstring(xml.encode('ascii'))
         self.message_identifier = str(
             root.imsx_POXHeader.imsx_POXRequestHeaderInfo.
             imsx_messageIdentifier)
