@@ -158,5 +158,5 @@ class OutcomeResponse(object):
             language.text = 'en'
             text_string = etree.SubElement(result_score, 'textString')
             text_string.text = str(self.score)
-
         return '<?xml version="1.0"?>'.encode('utf-8') + etree.tostring(root, encoding='utf-8')
+
