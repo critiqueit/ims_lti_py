@@ -56,6 +56,7 @@ class OutcomeRequest(object):
         '''
         request = OutcomeRequest()
         request.post_request = post_request
+        print("X" * 50, 'i am the post request: ', post_request)
         request.process_xml(post_request.data)
         return request
 
@@ -175,17 +176,14 @@ class OutcomeRequest(object):
         Parse Outcome Request data from XML.
         '''
         root = objectify.fromstring(xml)
-        self.message_identifier = str(
-            root.imsx_POXHeader.imsx_POXRequestHeaderInfo.
-            imsx_messageIdentifier)
+        self.message_identifier = root.imsx_POXHeader.imsx_POXRequestHeaderInfo.imsx_messageIdentifier.__str__()
         try:
             result = root.imsx_POXBody.replaceResultRequest
             self.operation = REPLACE_REQUEST
             # Get result sourced id from resultRecord
             self.lis_result_sourcedid = result.resultRecord.\
                 sourcedGUID.sourcedId
-            self.score = str(result.resultRecord.result.
-                             resultScore.textString)
+            self.score = result.resultRecord.result.resultScore.textString.__str__()
         except:
             pass
 
@@ -253,4 +251,4 @@ class OutcomeRequest(object):
                 resultDataURL = etree.SubElement(resultData, 'url')
                 resultDataURL.text = self.result_data['url']
 
-        return etree.tostring(root, xml_declaration=True, encoding='utf-8')
+        return etree.tostring(root, xml_declaration=True)

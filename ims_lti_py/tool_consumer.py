@@ -2,7 +2,7 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import str
 from collections import defaultdict
-from urllib.parse import unquote
+from urllib.parse import unquote, urlparse
 
 import oauth2
 import time
@@ -81,7 +81,7 @@ class ToolConsumer(LaunchParamsMixin, RequestValidatorMixin, object):
         params.update(self._params_update())
         params.update({'oauth_consumer_key': consumer.key})
 
-        uri = urlparse.urlparse(self.launch_url)
+        uri = urlparse(self.launch_url)
         if uri.query != '':
             for param in uri.query.split('&'):
                 key, val = param.split('=')
@@ -104,6 +104,8 @@ class ToolConsumer(LaunchParamsMixin, RequestValidatorMixin, object):
                 return_params[key] = None
             elif isinstance(request[key], list):
                 return_params[key] = request.get_parameter(key)
+            elif key == 'oauth_signature':
+                return_params[key] = ((request.get_parameter(key)))
             else:
-                return_params[key] = unquote(request.get_parameter(key))
+                return_params[key] = ((request.get_parameter(key)))
         return return_params

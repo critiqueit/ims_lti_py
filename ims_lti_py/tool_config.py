@@ -245,4 +245,4 @@ class ToolConfig(object):
             identifierref = etree.SubElement(root, 'cartridge_icon',
                     identifierref = self.cartridge_icon)
 
-        return '<?xml version="1.0" encoding="UTF-8"?>' + etree.tostring(root)
+        return '<?xml version="1.0"?>'.encode('utf-8') + etree.tostring(root, encoding='utf-8')

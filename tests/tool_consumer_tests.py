@@ -21,8 +21,8 @@ class TestToolConsumer(unittest.TestCase):
         tc.launch_url = 'http://dr-chuck.com/ims/php-simple/tool.php?a=1&b=2&c=3%20%26a'
         result = tc.generate_launch_data()
         self.assertNotEqual(result, None)
-        self.assertEquals(result['oauth_signature'], 
-                'kiObbrNVu4vHzd0+yVDHvrsvegQ=')
+        print('WHAT IS THE TRUTH', result['oauth_signature'], 'kiObbrNVu4vHzd0+yVDHvrsvegQ='.encode('ascii'))
+        self.assertEquals(result['oauth_signature'], 'kiObbrNVu4vHzd0+yVDHvrsvegQ='.encode('ascii'))
         self.assertEquals(result['c'], '3 &a')
 
     def test_signature_port(self):

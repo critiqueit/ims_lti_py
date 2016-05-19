@@ -5,7 +5,7 @@ import unittest
 
 class TestOutcomeResponse(unittest.TestCase):
     def setUp(self):
-        self.response_xml = '<?xml version="1.0" encoding="UTF-8"?><imsx_POXEnvelopeResponse xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0"><imsx_POXHeader><imsx_POXResponseHeaderInfo><imsx_version>V1.0</imsx_version><imsx_messageIdentifier></imsx_messageIdentifier><imsx_statusInfo><imsx_codeMajor>success</imsx_codeMajor><imsx_severity>status</imsx_severity><imsx_description></imsx_description><imsx_messageRefIdentifier>123456789</imsx_messageRefIdentifier><imsx_operationRefIdentifier>replaceResult</imsx_operationRefIdentifier></imsx_statusInfo></imsx_POXResponseHeaderInfo></imsx_POXHeader><imsx_POXBody><replaceResultResponse/></imsx_POXBody></imsx_POXEnvelopeResponse>'
+        self.response_xml = '<?xml version="1.0"?><imsx_POXEnvelopeResponse xmlns="http://www.imsglobal.org/services/ltiv1p1/xsd/imsoms_v1p0"><imsx_POXHeader><imsx_POXResponseHeaderInfo><imsx_version>V1.0</imsx_version><imsx_messageIdentifier></imsx_messageIdentifier><imsx_statusInfo><imsx_codeMajor>success</imsx_codeMajor><imsx_severity>status</imsx_severity><imsx_description></imsx_description><imsx_messageRefIdentifier>123456789</imsx_messageRefIdentifier><imsx_operationRefIdentifier>replaceResult</imsx_operationRefIdentifier></imsx_statusInfo></imsx_POXResponseHeaderInfo></imsx_POXHeader><imsx_POXBody><replaceResultResponse/></imsx_POXBody></imsx_POXEnvelopeResponse>'.encode('ascii')
 
     def mock_response(self, response_xml):
         class mock_resp(object):
@@ -33,7 +33,7 @@ class TestOutcomeResponse(unittest.TestCase):
         '''
         Should parse readResult response XML.
         '''
-        read_xml = self.response_xml.replace(\
+        read_xml = self.response_xml.decode('utf-8').replace(\
                 '<replaceResultResponse/>',\
                 '''<readResultResponse>
 <result>
@@ -56,7 +56,7 @@ class TestOutcomeResponse(unittest.TestCase):
         '''
         Should parse deleteResult response XML.
         '''
-        delete_xml = self.response_xml.replace('replaceResult', 'deleteResult')
+        delete_xml = self.response_xml.decode('utf-8').replace('replaceResult', 'deleteResult')
         fake = self.mock_response(delete_xml)
         result = OutcomeResponse.from_post_response(fake, delete_xml)
         self.assertTrue(result.is_success())
@@ -71,8 +71,9 @@ class TestOutcomeResponse(unittest.TestCase):
         '''
         Should recognize a failure response.
         '''
-        failure_xml = self.response_xml.replace('success', 'failure')
+        failure_xml = self.response_xml.decode('utf-8').replace('success', 'failure')
         fake = self.mock_response(failure_xml)
+        print('I AM FAKE', fake.data)
         result = OutcomeResponse.from_post_response(fake, failure_xml)
         self.assertTrue(result.is_failure())
 
