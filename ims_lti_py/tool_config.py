@@ -183,7 +183,7 @@ class ToolConfig(object):
                           %(NSMAP['lticm'], 'property'), name = key)
                 param_node.text = val
 
-    def to_xml(self, opts = defaultdict(lambda: None)):
+    def to_xml(self, opts=defaultdict(lambda: None), encoding=None):
         '''
         Generate XML from the current settings.
         '''
@@ -245,4 +245,4 @@ class ToolConfig(object):
             identifierref = etree.SubElement(root, 'cartridge_icon',
                     identifierref = self.cartridge_icon)
 
-        return '<?xml version="1.0" encoding="UTF-8"?>' + etree.tostring(root)
+        return '<?xml version="1.0" encoding="UTF-8"?>' + etree.tostring(root, encoding=encoding)
